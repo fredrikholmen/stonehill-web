@@ -1,0 +1,111 @@
+.list-body {
+    position: absolute;
+    top: $size-list-header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0px;
+	&.disabled {
+		th, td { opacity: 0.3; }
+		button { background: #222; }
+	}
+	tr {
+		&:nth-child(even) { background: #f5f5f5; }
+		&:hover {
+			//color: #000;
+			.icon-button { opacity: 1; }
+		}
+		&.active {
+			background: #60A2D8;
+			td, td .fa {
+				color: #fff;
+				opacity: 1;
+			}
+		}
+		th, td {
+			text-align: left;
+			padding: 10px 15px;
+            height: 50px;
+			font-size: 13px;
+            &:not(:last-child) { padding-right: 0; }
+			button { margin: -9px 0px; }
+            .icon-button {
+                width: 20px;
+                text-align: center;
+                margin-top: 3px;
+                font-size: 14px;
+            }
+            &.border-right {
+                border-right: 1px solid $border-color-light;
+            }
+		}
+		th {
+			color: #bbb;
+			font-weight: 500;
+            border-bottom: 1px solid $border-color-light;
+			//&:last-child { box-shadow: 1px 0px 0px darken($dark-grey, 5%); }
+			&:first-child {
+				color: #555;
+				font-weight: 600;
+			};
+            .button { border-bottom: 1px solid #235681; }
+            input[type='search'] {
+                border-radius: 50px;
+                padding: $size-tiny;
+                border: 1px solid $border-color;
+                margin-top: -$size-tiny;
+                margin-bottom: -$size-tiny;
+            }
+		}
+		td {
+			//cursor: pointer;
+			&:first-child {
+				font-weight: 600;
+			}
+            &.no-items {
+                height: 100px;
+                //background: #fff;
+                font-style: italic;
+                text-align: center;
+            }
+			.icon-button {
+                opacity: 1;
+            }
+			i {
+                //font-size: 16px !important;
+                color: $medium-grey;
+            }
+			.fa-check { color: $font-green; }
+			.fa-trash { color: $medium-grey; }
+			.fa-edit {
+			    margin-top: 1px;
+				margin-right: 7px;
+			    vertical-align: top;
+				color: $font-blue;
+			}
+            p {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+		}
+	}
+    tfoot {
+        td {
+            border-top: 1px solid $border-color-light;
+            font-weight: 600;
+            background: #F5F5F5;
+            box-shadow: 0 1px 0px rgba(0,0,0,0.05) inset;
+            .icon-space {
+                display: inline-block;
+                width: 25px;
+            }
+            font-weight: 600;
+        }
+    }
+}

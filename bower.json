@@ -1,0 +1,20 @@
+{
+  "name": "stonehill-app",
+  "version": "0.0.0",
+  "homepage": "local.stonehill.com",
+  "authors": [
+    "Fredrik Holmen <fredrik.holmen@feedeo.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.10.6"
+  }
+}

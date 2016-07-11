@@ -1,0 +1,75 @@
+<section>
+            <div class='float-left'>
+                <h2>Effekt</h2>
+                <span style="font-size:5em">{{powerConsumption.effect}} W</span>
+            </div>
+            <div class="float-right">
+                <h2>Förbrukning</h2>
+                <dl>
+                    <dt>Idag</dt>
+                    <dd>{{powerConsumption.today}} kWh</dd>
+                    <dt>Denna månad</dt>
+                    <dd>{{powerConsumption.month}} kWh</dd>
+                    <dt>Elkostnad</dt>
+                    <dd>{{powerConsumption.money}} SEK</dd>
+                </dl>
+            </div>
+            <div style="clear:both" />
+</section>
+<section>
+<div>
+    <ul>
+        <li>Minut</li>
+        <li>Timma</li>
+        <li>Dag</li>
+        <li>Månad</li>
+    </ul>
+    <h2>Here be charts</h2>
+</div>
+</section>
+<section>
+    <table class='margin-top-large margin-bottom-large'>
+        <tr>
+            <th>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+                   ng-class='{"fa-spin":allProfilesRefreshing}'
+                   ng-click='refreshAllProfiles(loadedProfiles)'></i>
+                Date
+            </th>
+            <th class='border-right'>
+                Average power (kWh)
+            </th>
+            <th>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+                   ng-class='{"fa-spin":allProfilesFollowersRefreshing}'
+                   ng-click='updateFollowersForAllProfile()'></i>
+                Energy
+            </th>
+        </tr>
+        <tr ng-if='profiles.all.length == 0'>
+            <td colspan='3' class='no-items'>
+                Välj ett annat datum
+            </td>
+        </tr>
+        <tr ng-repeat='profile in profiles.all'>
+            <td>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+
+                ng-class='{"fa-spin":profile.refreshing}'
+                ng-click='refreshProfile(profile)'></i>
+                @{{ profile.tw_screen_name }}
+            </td>
+            <td>{{ profile.name }}</td>
+            <td class='border-right'>
+                <span ng-if='!profile.refreshing'>{{profile.profile_updated | date:'yyyy-MM-dd'}}</span>
+                <span ng-if='profile.refreshing' class='fade'>Refreshing...</span>
+            </td>
+        </tr>
+        <tfoot>
+            <tr class=''>
+                <td>{{ profiles.all.length }} profiles</td>
+                <td></td>
+                <td class='border-right'></td>
+            </tr>
+        </tfoot>
+    </table>

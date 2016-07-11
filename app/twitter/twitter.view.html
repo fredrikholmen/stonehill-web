@@ -1,0 +1,196 @@
+<section>
+    <div>
+        <form>
+            <label class='input-connect'>Twitter username</label>
+            <div class='icon-input label-connect at-input float-left' style='width: 150px;'>
+                <span>@</span>
+                <input type='text' ng-model='profileHandle'>
+            </div>
+            <button class='primary float-left margin-left' ng-click='addProfileToGroup()' style='min-width: 100px;'>
+                <i class='fa fa-cog fa-spin' ng-if='addProfileButtonLoader'></i>
+                <span ng-if='!addProfileButtonLoader'>
+                    Add profile
+                    <span ng-if='verticals.current'>to "{{ verticals.current.name }}"</span>
+                </span>
+            </button>
+        </form>
+        <select class='float-right'
+                ng-model='verticals.current' 
+                ng-options='vertical as vertical.name for vertical in verticals.all'
+                ng-change='selectVertical()'>
+        </select>
+        <div class='clear'></div>
+    </div>
+    <table class='margin-top-large margin-bottom-large'>
+        <tr>
+            <th>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+                   ng-class='{"fa-spin":allProfilesRefreshing}'
+                   ng-click='refreshAllProfiles(loadedProfiles)'></i>
+                Twitter user
+            </th>
+            <th>Name</th>
+            <th class='border-right'>
+                Synchronized
+            </th>
+            <th>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+                   ng-class='{"fa-spin":allProfilesFollowersRefreshing}'
+                   ng-click='updateFollowersForAllProfile()'></i>
+                Followers
+            </th>
+            <th class='border-right'>Last collected</th>
+            <th style='width: 20px;'>
+                <i class='fa fa-times icon-button float-right'
+                   ng-class='{"fa-spin":allProfilesFollowersRefreshing}'
+                   ng-click='removeAllProfilesFromVertical()'></i>
+            </th>
+        </tr>
+        <tr ng-if='profiles.all.length == 0'>
+            <td colspan='6' class='no-items'>
+                Add new Twitter users or select a group above.
+            </td>
+        </tr>
+        <tr ng-repeat='profile in profiles.all'>
+            <td>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+
+                ng-class='{"fa-spin":profile.refreshing}'
+                ng-click='refreshProfile(profile)'></i>
+                @{{ profile.tw_screen_name }}
+            </td>
+            <td>{{ profile.name }}</td>
+            <td class='border-right'>
+                <span ng-if='!profile.refreshing'>{{profile.profile_updated | date:'yyyy-MM-dd'}}</span>
+                <span ng-if='profile.refreshing' class='fade'>Refreshing...</span>
+            </td>
+            <td>
+                <i class="fa fa-key icon primary float-left margin-right-small" ng-if='profile.tw_protected == 1' title="This user has protected tweets and followers."/>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+                   ng-class='{"fa-spin":profile.updateFollowersState}'
+                   ng-click='updateFollowersForProfile(profile)'
+                   ng-if='profile.tw_protected == 0'></i>
+                {{ profile.collected_followers_count|number }} <span class='font-very-light'>({{ profile.tw_followers_count|number }})</span>
+            </td>
+            <td class='border-right'>
+                <span ng-if='!profile.updateFollowersState && profile.collected_followers_updated'>{{ profile.collected_followers_updated | date:'yyyy-MM-dd' }}</span>
+                <span ng-if='!profile.updateFollowersState && !profile.collected_followers_updated'>No followers downloaded</span>
+                <span ng-if='profile.updateFollowersState' class='fade'>{{ profile.updateFollowersState }}...</span>
+            </td>
+            <td>
+                <i class='fa fa-times icon-button float-right'
+                   ng-click='removeProfileFromVertical(profile)'></i>
+            </td>
+        </tr>
+        <tfoot>
+            <tr class=''>
+                <td>{{ profiles.all.length }} profiles</td>
+                <td></td>
+                <td class='border-right'></td>
+                <td>
+                    <span class='icon-space'></span>
+                    {{ downloadedFollowersSumFromProfiles }} <span class='font-very-light'>({{ followersSumFromProfiles|number }})</span>
+                </td>
+                <td class='border-right'></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <button class='default float-left margin-right' ng-click='deleteVertical(verticals.current)' ng-if='verticals.current && verticals.current.is_default != 1'>
+        <i class='fa fa-times margin-right-tiny'></i>Remove group
+    </button>
+    <button class='default float-right fade-item'
+            ng-class='{"hidden":newGroupMode}'
+            ng-click='toggleNewGroup()'>
+        New group
+    </button>
+    <div class='float-right fade-item' ng-class='{"hidden":!newGroupMode}'>
+        <button class='default float-right margin-left' ng-click='toggleNewGroup()'>
+            Cancel
+        </button>
+        <form class='float-right'>
+            <label class='input-connect'>Group name</label>
+            <div class='icon-input label-connect float-left' style='width: 150px;'>
+                <i class='fa fa-users'></i>
+                <input type='text' ng-model='groupName'>
+            </div>
+            <button class='primary float-left margin-left'
+                    ng-click='createVerticalWithProfiles()'
+                    title='Create a group prefilled with the users of your current group.'>
+                <i class='fa fa-cog fa-spin' ng-if='addGroupWithProfilesButtonLoader'></i>
+                <span ng-if='!addGroupWithProfilesButtonLoader'>Create with profiles</span>
+            </button>
+            <button class='primary float-left margin-left' 
+                    ng-click='createVertical()' 
+                    title='Create an empty group.'>
+                <i class='fa fa-cog fa-spin' ng-if='addGroupButtonLoader'></i>
+                <span ng-if='!addGroupButtonLoader'>Create empty</span>
+            </button>
+        </form>
+    </div>
+    <span class='clear'></span>
+</section>
+
+<hr>
+
+<section>
+    <div class='align-center'>
+        <h2>Power middles</h2>
+        <p ng-if='!congregations.currentCount'>No power middles graphed right now.</p>
+        <p ng-if='congregations.currentCount'>{{ congregations.currentCount.length }} power middles detected.</p>
+        <button class='primary margin-top-large' ng-if='!congregations.currentCount.length > 0' ng-click='getCongregationCount()'>
+            <i class='fa fa-refresh margin-right-tiny' ng-class='{"fa-spin":refreshCongregationCountLoader}'></i>
+            Graph power middles
+        </button>
+    </div>
+    <table ng-if='congregations.currentCount.length > 0' class='bar-graph'>
+        <tr>
+            <th style='width: 100px;'>
+                <!--<button class='default'><i class='fa fa-refresh'></i> Refresh</button>-->
+            </th>
+            <th style='width: 100px;'>
+            </th>
+            <th style='padding-left: 0;'>
+                <i class='fa fa-refresh icon-button primary'
+                   ng-class='{"fa-spin":refreshCongregationCountLoader}'
+                   ng-click='getCongregationCount()'></i>
+                Refresh power middles
+            </th>
+            <th style='width: 80px;'>
+                Following
+            </th>
+        </tr>
+        <tr ng-repeat='bar in congregationsGraph'>
+            <td>
+                <button class='button primary' ng-click='getCongregation(bar)'>
+                    Profiles
+                </button>
+            </td>
+            <td class='bar-profiles'>
+                {{ bar.count|number }} <i class='fa fa-group'></i>
+            </td>
+            <td>
+                <div class='bar' style='width: {{ bar.width }}%;'>
+                    <img src='images/bar-break.png' ng-if='bar.width > 100'>
+                </div>
+                <i class='fa fa-refresh refresh-populate fa-spin' ng-if='refreshPopulate == bar.cutoff' title='Populating...'></i>
+            </td>
+            <td class='bar-following'>
+                <i class='fa fa-twitter'></i> {{ bar.cutoff }}
+            </td>
+        </tr>
+    </table>
+    <div class="congregation-grid" ng-class='{"minimized":hiddenCongregation}' ng-if='congregations.current'>
+        <div class='toolbar'>
+            <button class='button primary float-left' ng-hide='hiddenCongregation' ng-click='populateCongregation()'>
+                <i class='fa fa-refresh margin-right-tiny' ng-class='{"fa-spin":refreshPopulate}'></i>
+                Populate
+            </button>
+            <button class='button default float-right' ng-click='closeCongregationTable()'>
+                Close
+            </button>
+        </div>
+        <div ui-grid="congregations.gridOptions" class='table' ui-grid-resize-columns ui-grid-exporter></div>
+    </div>
+</section>
+

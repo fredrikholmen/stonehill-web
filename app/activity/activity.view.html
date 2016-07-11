@@ -1,0 +1,76 @@
+<section>
+    
+    <table class='margin-top-large margin-bottom-large'>
+        <tr>
+            <th>
+                <i class='fa fa-refresh icon-button primary float-left margin-right-small'
+                   ng-class='{"fa-spin":allActivitiesRefreshing}'
+                   ng-click='refreshAllActivities()'></i>
+                Activity
+            </th>
+            <th>Value</th>
+        <tr>
+            <td colspan=2><i>Twitter profiles</i></td>
+        </tr>
+        <tr>
+            <td>
+                Total profiles
+            </td>
+            <td>
+                {{activities.profiles | number }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Profiles being updated
+            </td>
+            <td>
+                {{activities.updatingProfiles | number }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2><i>Keywords</i></td>
+        </tr>
+        <tr>
+            <td>
+                Total keywords
+            </td>
+            <td>
+                {{activities.keywords | number }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Keywords updated last 24 hours
+            </td>
+            <td>
+                {{activities.kwLast1Day | number }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Keywords updated last 7 days
+            </td>
+            <td>
+                {{activities.kwLast7Days | number }}
+            </td>
+        </tr>
+
+        <tfoot>
+            <tr class=''>
+                
+            </tr>
+        </tfoot>
+    </table>
+
+ 
+   
+    <span class='clear'></span>
+</section>
+
+<hr>
+
+<section>
+    
+</section>
+

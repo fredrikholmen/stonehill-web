@@ -1,0 +1,68 @@
+.ngdialog-theme-feedeo {
+    .ngdialog-content {
+        box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+        width: 1000px;
+        height: 100%;
+        overflow: hidden;
+        /*
+        header {
+            background: $light-grey;
+            height: 60px;
+            a {
+                display: inline-block;
+                float: left;
+                padding: $size-large;
+                color: $font-light;
+                cursor: pointer;
+                &.active {
+                    background: #fff;
+                    color: #444;
+                }
+            }
+        }
+        */
+        main {
+            padding: $size-huge;
+            overflow: auto;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            &.has-tab-bar { top: 60px; }
+            &.has-footer { bottom: 63px; }
+            &.no-padding { padding: 0; }
+            header {
+                //background: #F5F5F5;
+                //border-bottom: 1px solid #E5E5E5;
+                margin: $size-huge $size-huge 0 $size-huge;
+                padding-bottom: $size-huge;
+                border-bottom: 1px solid $border-color-light;
+                border-radius: $border-radius $border-radius 0 0;
+                //position: fixed;
+                //width: 1000px;
+                //z-index:2;
+                //height: 80px;
+            }
+            .content-with-header {
+
+            }
+        }
+        footer {
+            margin: 0 $size-huge $size-huge $size-huge;
+            padding-top: $size-huge;
+            border-top: 1px solid $border-color-light;
+            /*
+            height: 63px;
+            border-top: 1px solid $border-color;
+            padding: $size-medium;
+            background: #f5f5f5;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-radius: 0 0 $border-radius $border-radius;
+            */
+        }
+    }
+}

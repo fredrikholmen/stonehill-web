@@ -1,0 +1,28 @@
+ul.tabs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul.tabs li {
+    float: left;
+    width: 50%;
+    border-bottom-width: 0;
+    margin: 10px 0px 0px 0px;
+    padding: 8px 5px 8px 5px;
+    background-color: lightgray;
+    text-align: center;
+    font-size: normal;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}   
+
+#mainView {
+    border-top: 1px solid black;
+	clear: both;
+	padding: 1em 1em;
+}
+.tabs .active {
+    border-bottom: 1px solid #219E69;
+    color: #000;
+}

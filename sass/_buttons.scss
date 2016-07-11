@@ -1,0 +1,42 @@
+button {
+	padding: 10px 12px 10px 12px;
+	text-align: center;
+	border: 0;
+	border-radius: $border-radius;
+	color: #fff;
+	cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+	//&:hover { background: lighten(#60A2D8, 10%); }
+	//&:active { background: #60A2D8; }
+    &.inverted {
+        background: #fff;
+        color: #333;
+    }
+    &.default {
+        background: $very-light-grey;
+        border: 1px solid $border-color-light;
+        color: #333;
+        &:hover {
+            background: $light-grey;
+            border: 1px solid $medium-grey;
+        }
+    }
+    &.primary {
+        background: $background-green;
+        border: 1px solid $background-green;
+        &:hover {
+            background: darken($background-green, 15%);
+        }
+    }
+}
+
+.icon-button {
+    cursor: pointer;
+    &.primary {
+        color: $font-green;
+    }
+    &:hover {
+        color: #000;
+    }
+}

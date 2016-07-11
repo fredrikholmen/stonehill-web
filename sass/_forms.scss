@@ -1,0 +1,106 @@
+input[type='text'], input[type='email'], input[type='password'] {
+    padding: 10px 0 11px $size-small;
+    border: 1px solid $medium-grey;
+    border-radius: $border-radius;
+    &.label-connect {
+        border-radius: 0 $border-radius $border-radius 0;
+    }
+}
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    text-align: left;
+    color: $dark-grey;
+    padding: 10px;
+    border-radius: 5px;
+    padding-right: 25px;
+    border: 1px solid $border-color-light;
+    background-color: $very-light-grey;
+    background-image: url(../images/caret-down.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 18px;
+    &:hover {
+        background-color: $light-grey;
+        border: 1px solid $medium-grey;
+    }
+}
+label {
+    &.input-connect {
+        padding: 9px 10px 10px 10px;
+        background: #F5F5F5;
+        border-radius: 5px 0 0 5px;
+        border: 1px solid $border-color-light;
+        float: left;
+    }
+}
+.icon-input {
+    border: 1px solid $border-color-light;
+    border-radius: $border-radius;
+    height: 39px;
+    input {
+        border: 0;
+        width: 100%;
+        padding-left: 30px;
+        float: left;
+    }
+    i {
+        width: 0px;
+        padding-left: 0px;
+        margin-top: 12px;
+        float: left;
+        position: relative;
+        &:before { margin-left: 10px; }
+    }
+    &.label-connect {
+        border-radius: 0 $border-radius $border-radius 0;
+        border-left: 0;
+    }
+}
+.at-input {
+    input {
+        padding-left: 15px;
+        width: calc(100% - 7px);
+    }
+    span {
+        width: 0px;
+        padding-left: 0px;
+        position: relative;
+        font-size: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 7px;
+        margin-left: 7px;
+    }   
+}
+.column-form {
+    h1 {
+        margin-left: 150px + $size-medium;
+    }
+    > label, fieldset > label {
+        width: 150px;
+        margin-right: $size-medium;
+        float: left;
+        text-align: right;
+        padding: 8px;
+        color: $font-very-light;
+    }
+    input[type='text'], input[type='email'], input[type='password'], .icon-input {
+        width: calc(100% - 290px);
+        float: left;
+        margin-bottom: $size-medium;
+    }
+    .icon-input {
+        input { width: 500px - 2px; }
+    }
+    fieldset {
+        border: 0;
+        padding: $size-small 0 $size-small 0;
+        margin-left: 0;
+        > label {
+            margin-right: $size-small;
+        }
+    }
+}
