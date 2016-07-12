@@ -26,13 +26,25 @@ angular.module("leadric").controller("powerController", function($scope, Restang
 			$scope.powerConsumption.money = response[0].month * 0.0012;
 		});	
 
-
-
 	}
 
 	$scope.refreshAllActivities();
 
-	
-	
+	var chartData = Restangular.one('power/timeline/today');
+		chartData.getList().then(function(response) {
+		$scope.labels = [];
+		$scope.data = [[]];
+		$scope.series = ['Förbrukning (Wh)'];
 
+		$scope.labels = response.map(function(obj){
+			return obj.slot;
+		});
+
+		$scope.data[0] = response.map(function(obj){
+			return obj.energy;
+		});		
+
+		console.log($scope.labels);
+
+	});
 });

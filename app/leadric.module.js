@@ -2,14 +2,15 @@ angular.module('leadric',[
     'ngDialog',
     'ui.router',
     'restangular',
-    'ngSanitize'
+    'ngSanitize',
+    'chart.js'
 ])
 
 .config(function(RestangularProvider, $stateProvider, $urlRouterProvider) {
     if(document.domain === 'local.stonehill.com')
-        RestangularProvider.setBaseUrl('http://192.168.1.3:5000');
-    else
         RestangularProvider.setBaseUrl('http://localhost:5000');
+    else
+        RestangularProvider.setBaseUrl('http://192.168.1.3:5000');
         
     //RestangularProvider.setDefaultHttpFields({withCredentials:true});
 

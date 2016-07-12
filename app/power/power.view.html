@@ -18,13 +18,16 @@
 </section>
 <section>
 <div>
+
     <ul>
-        <li>Minut</li>
-        <li>Timma</li>
-        <li>Dag</li>
-        <li>Månad</li>
+        <li>Senaste timman</li>
+        <li>Idag</li>
+        <li>Senaste 7 dagarna</li>
+        <li>Senaste 30 dagarna</li>
     </ul>
-    <h2>Here be charts</h2>
+
+    <h2 ng-if="data[0].length == 0">No data could be found for these dates</h2>
+<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
 </div>
 </section>
 <section>
