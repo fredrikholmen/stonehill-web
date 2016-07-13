@@ -41,12 +41,12 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 		stop = $interval(function() {
 			if ($scope.timeline == 'minute') {
 				console.log("Update chart");
-				//populateChart('minute');
+				populateChart('minute');
 			} else {
 				console.log("STOPPING Update chart");
 				$scope.stopRefresh();
 			}
-		}, 6000);
+		}, 60000);
 	};
 
 	$scope.stopRefresh = function() {
