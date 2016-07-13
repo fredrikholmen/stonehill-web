@@ -42,6 +42,10 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 			if ($scope.timeline == 'minute') {
 				console.log("Update chart");
 				populateChart('minute');
+				var effect = Restangular.one('power/effect');
+				effect.getList().then(function(response) {
+					$scope.powerConsumption.effect = response[0].P;
+				});
 			} else {
 				console.log("STOPPING Update chart");
 				$scope.stopRefresh();
