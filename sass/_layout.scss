@@ -79,13 +79,14 @@ body > main {
     }
     section {
         padding: $size-huge;
+        padding-top: $size-medium;
     }
 }
 
 .platta {
     min-width: 40%;
     display: inline-block;
-    margin: $size-medium;
+    margin: 0 $size-huge $size-huge 0;
     float: left;
     background: $very-light-grey;
     padding: $size_medium;
