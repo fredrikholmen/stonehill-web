@@ -23,7 +23,7 @@
 
     <div>
         <button ng-class="{'primary': 'minute' == timeline, 'default': timeline != 'minute'}" ng-click='getLast60MinutesTimeline()'>
-        <i class='fa fa-cog fa-spin' ng-if='timeline == "minute"'></i>
+        <i class='fa fa-spinner fa-spin' ng-if='timeline == "minute"'></i>
             Senaste timman</button>
         <button ng-class="{'primary': 'today' == timeline, 'default': timeline != 'today'}" ng-click='getTodayTimeline()'>Idag</button>
         <button ng-class="{'primary': '7days' == timeline, 'default': timeline != '7days'}" ng-click='getLast7DaysTimeline()'>Senaste 7 dagarna</button>
@@ -31,7 +31,7 @@
     </div>
 
     <span class="alert" ng-if="data[0].length == 0">No data could be found for this period</span>
-<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
+<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-legend="true">
     
 </canvas>
 </div>

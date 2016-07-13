@@ -1,5 +1,5 @@
 {
-  "name": "stonehill-app",
+  "name": "stonehill-web",
   "version": "0.0.0",
   "homepage": "local.stonehill.com",
   "authors": [
@@ -15,6 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "moment": "~2.10.6"
+    "angular-chart.js": "^0.10.2"
   }
 }

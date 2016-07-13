@@ -23,6 +23,20 @@ angular.module('leadric',[
       })
 })
 
+.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      onAnimationComplete: function(){
+      var pos = this.datasets[0].bars.length;
+      console.log(this.datasets[0].bars[pos-1]);
+      this.datasets[0].bars[pos-1].fillColor = "rgba(251, 192, 45, 0.2)";
+      this.datasets[0].bars[pos-1].strokeColor = "rgba(251, 192, 45, 1)";
+      this.datasets[0].bars[pos-1].highlightFill = "rgba(251, 192, 45, 1)";
+      this.update()
+    },
+      responsive: true
+    });
+}])
 
 .filter('propsFilter', function() {
   return function(items, props) {

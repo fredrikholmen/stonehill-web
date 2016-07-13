@@ -91,7 +91,7 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 		chartData.getList().then(function(response) {
 		$scope.labels = [];
 		$scope.data = [[]];
-		$scope.series = ['Förbrukning (Wh)'];
+		$scope.series = ['Förbrukning (kWh)'];
 
 		$scope.labels = response.map(function(obj){
 			return obj.slot;
@@ -99,9 +99,7 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 
 		$scope.data[0] = response.map(function(obj){
 			return obj.energy;
-		});		
-
-		console.log($scope.labels);
+		});	
 
 	});
 	} 
