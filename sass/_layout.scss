@@ -82,6 +82,21 @@ body > main {
     }
 }
 
+.platta {
+    min-width: 40%;
+    display: inline-block;
+    margin: $size-medium;
+    float: left;
+    background: $very-light-grey;
+    padding: $size_medium;
+    border-radius: $border-radius;
+    text-align: center;
+    &:last-of-type { margin-right: 0; }
+    &.highlight {
+        background: #fbc02d;
+    }
+}
+
 .box {
     &.third {
         width: calc(33.3333% - $size-medium);
@@ -91,6 +106,18 @@ body > main {
         border-radius: $border-radius;
         &:last-of-type { margin-right: 0; }
     }
+}
+
+.alert {
+    width: 80%;
+    display: inline-block;
+    margin: $size-medium auto;
+    background: #fbc02d;
+    border: 1px solid $dark-grey;
+    padding: $size_medium;
+    border-radius: $border-radius;
+    text-align: center;
+    font-size: $size-font-large;
 }
 
 .tab-bar {

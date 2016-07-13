@@ -1,33 +1,39 @@
 <section>
-            <div class='float-left'>
-                <h2>Effekt</h2>
-                <span style="font-size:5em">{{powerConsumption.effect}} W</span>
+            <div class='platta highlight'>
+                <span style="font-size: 5em">{{powerConsumption.effect}} W</span>
+                <h2>Effekt just nu</h2>
             </div>
-            <div class="float-right">
-                <h2>Förbrukning</h2>
-                <dl>
-                    <dt>Idag</dt>
-                    <dd>{{powerConsumption.today}} kWh</dd>
-                    <dt>Denna månad</dt>
-                    <dd>{{powerConsumption.month}} kWh</dd>
-                    <dt>Elkostnad</dt>
-                    <dd>{{powerConsumption.money}} SEK</dd>
-                </dl>
+            <div class='platta'>
+                <span style="font-size: 5em">{{powerConsumption.today | number: 2}} kWh</span>
+                <h2>Idag</h2>
             </div>
-            <div style="clear:both" />
+            <div class='platta'>
+                <span style="font-size: 5em">{{powerConsumption.month | number: 0}} kWh</span>
+                <h2>Denna månad</h2>
+            </div>
+            <div class='platta'>
+                <span style="font-size: 5em">{{powerConsumption.money | number : 0}} SEK</span>
+                <h2>Månadskostnad</h2>
+            </div>
+            
 </section>
+<div class="hr" style="clear:both"/>
 <section>
 <div>
 
-    <ul>
-        <li>Senaste timman</li>
-        <li>Idag</li>
-        <li>Senaste 7 dagarna</li>
-        <li>Senaste 30 dagarna</li>
-    </ul>
+    <div>
+        <button ng-class="{'primary': 'minute' == timeline, 'default': timeline != 'minute'}" ng-click='getLast60MinutesTimeline()'>
+        <i class='fa fa-cog fa-spin' ng-if='timeline == "minute"'></i>
+            Senaste timman</button>
+        <button ng-class="{'primary': 'today' == timeline, 'default': timeline != 'today'}" ng-click='getTodayTimeline()'>Idag</button>
+        <button ng-class="{'primary': '7days' == timeline, 'default': timeline != '7days'}" ng-click='getLast7DaysTimeline()'>Senaste 7 dagarna</button>
+        <button ng-class="{'primary': '30days' == timeline, 'default': timeline != '30days'}" ng-click='getLast30DaysTimeline()'>Senaste 30 dagarna</button>
+    </div>
 
-    <h2 ng-if="data[0].length == 0">No data could be found for these dates</h2>
-<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+    <span class="alert" ng-if="data[0].length == 0">No data could be found for this period</span>
+<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
+    
+</canvas>
 </div>
 </section>
 <section>
