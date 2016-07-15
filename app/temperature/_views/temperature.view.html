@@ -1,0 +1,35 @@
+<section>
+            <!--div class='platta third'>
+                <span style="font-size: 5em">{{temperature.kitchen | number: 1}}&deg;</span>
+                <h2>Köket</h2>
+            </div-->
+            <div class='platta third'>
+                <span title="Relative humidity" style="float:right; font-size: small; color: lightblue;"><i>RH</i> {{temperature.Basement.hum | number: 0}}%</span>
+                <span style="font-size: 5em">{{temperature.Basement.temp | number: 1}}&deg;</span>
+                <h2>Källaren</h2>
+            </div>
+            <div class='platta third'>
+                <span title="Relative humidity" style="float:right; font-size: small; color: lightblue;"><i>RH</i> {{temperature.Outdoor.hum | number:0}}%</span>
+                <span style="font-size: 5em">{{temperature.Outdoor.temp| number: 1}}&deg;</span>
+                <h2>Utomhus</h2>
+            </div>
+            
+</section>
+<div class="hr" style="clear:both"/>
+<section>
+<div>
+    <div>
+        <button ng-class="{'primary': 'minute' == timeline, 'default': timeline != 'minute'}" ng-click='getLast60MinutesTimeline()'>
+        <i class='fa fa-spinner fa-spin' ng-if='timeline == "minute"'></i>
+            Senaste timman</button>
+        <button ng-class="{'primary': 'today' == timeline, 'default': timeline != 'today'}" ng-click='getTodayTimeline()'>Idag</button>
+        <!--button ng-class="{'primary': '7days' == timeline, 'default': timeline != '7days'}" ng-click='getLast7DaysTimeline()'>Senaste 7 dagarna</button>
+        <button ng-class="{'primary': '30days' == timeline, 'default': timeline != '30days'}" ng-click='getLast30DaysTimeline()'>Senaste 30 dagarna</button-->
+    </div>
+
+    <span class="alert" ng-if="data[0].length == 0">No data could be found for this period</span>
+<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-legend="true" height="100px">
+    
+</canvas>
+</div>
+</section>
