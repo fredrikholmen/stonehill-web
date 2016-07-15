@@ -1,10 +1,10 @@
 angular.module("leadric").controller("powerController", function($scope, $interval, Restangular) {
 
 	$scope.powerConsumption = {
-		effect: 345,
-		today: 1.4,
-		month: 14.2,
-		money: 3424
+		effect: "N/A",
+		today: "N/A",
+		month: "-",
+		money: "-"
 	};
 
 	$scope.timeline = null;
@@ -42,10 +42,7 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 			if ($scope.timeline == 'minute') {
 				console.log("Update chart");
 				populateChart('minute');
-				var effect = Restangular.one('power/effect');
-				effect.getList().then(function(response) {
-					$scope.powerConsumption.effect = response[0].P;
-				});
+				$scope.refreshAllActivities();
 			} else {
 				console.log("STOPPING Update chart");
 				$scope.stopRefresh();

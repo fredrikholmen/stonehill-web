@@ -262,6 +262,8 @@ body > main {
     margin-right: 0; }
   .platta.highlight {
     background: #fbc02d; }
+  .platta.third {
+    min-width: 25%; }
 
 .box.third {
   width: calc(33.3333% - $size-medium);

@@ -36,6 +36,7 @@
     <script type='text/javascript' src='app/shared/industries.factory.js'></script>
 
     <script type='text/javascript' src='app/power/_controllers/powerController.js'></script>
+    <script type='text/javascript' src='app/temperature/_controllers/temperatureController.js'></script>
 
     
 </head>
@@ -46,9 +47,13 @@
             <span style="font-size: 1.5em; text-align: center; color: #fbc02d">Stonehill</span>
         </a>
         <a  ui-sref='power' ui-sref-active="active">
-            <i class='fa fa-tachometer'></i>
+            <i class='fa fa-bolt'></i>
             Elförbrukning
 		</a>
+        <a  ui-sref='temperature' ui-sref-active="active">
+            <i class='fa fa-tachometer'></i>
+            Temperatur
+        </a>
         
 	</nav>
 	<main ui-view></main>

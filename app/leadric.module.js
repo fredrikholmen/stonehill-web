@@ -21,6 +21,11 @@ angular.module('leadric',[
         templateUrl: '/app/power/power.view.html',
         controller: 'powerController'
       })
+      .state('temperature', {
+        url: '/temperature',
+        templateUrl: '/app/temperature/_views/temperature.view.html',
+        controller: 'temperatureController'
+      })
 })
 
 .config(['ChartJsProvider', function (ChartJsProvider) {
