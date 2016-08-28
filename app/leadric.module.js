@@ -10,7 +10,7 @@ angular.module('leadric',[
     if(document.domain === 'local.stonehill.com')
         RestangularProvider.setBaseUrl('http://localhost:5000');
     else
-        RestangularProvider.setBaseUrl('http://192.168.1.3:5000');
+        RestangularProvider.setBaseUrl('http://192.168.1.4:5000');
         
     //RestangularProvider.setDefaultHttpFields({withCredentials:true});
 
