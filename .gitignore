@@ -3,3 +3,4 @@
 .access.htpasswd
 
 bower_components
+node_modules
