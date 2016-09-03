@@ -19,6 +19,8 @@
 <section>
 <div>
     <div>
+        <button ng-class="{'primary': '30days' == timeline, 'default': timeline != '30days'}" ng-click='getLast30DaysTimeline()'>
+            30 dagar</button>
         <button ng-class="{'primary': 'minute' == timeline, 'default': timeline != 'minute'}" ng-click='getLast60MinutesTimeline()'>
         <i class='fa fa-spinner fa-spin' ng-if='timeline == "minute"'></i>
             Senaste timman</button>
@@ -28,7 +30,7 @@
     </div>
 
     <span class="alert" ng-if="data[0].length == 0">No data could be found for this period</span>
-<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-legend="true" height="100px">
+<canvas id="bar" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-legend="true" height="100px">
     
 </canvas>
 </div>

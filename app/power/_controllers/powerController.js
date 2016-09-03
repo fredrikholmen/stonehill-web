@@ -8,30 +8,7 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 	};
 
 	$scope.timeline = null;
-
-	$scope.refreshAllActivities = function() {
-		$scope.allActivitiesRefreshing = true;
-
-		var effect = Restangular.one('power/effect');
-		effect.getList().then(function(response) {
-			$scope.powerConsumption.effect = response[0].P;
-		});
-
-		var today = Restangular.one('power/today');
-		today.getList().then(function(response) {
-			$scope.powerConsumption.today = response[0].today / 1000;
-		});
-
-		var month = Restangular.one('power/month');
-		month.getList().then(function(response) {
-			$scope.powerConsumption.month = response[0].month / 1000;
-			$scope.powerConsumption.money = response[0].month * 0.0012;
-		});	
-
-	}
-
-	$scope.refreshAllActivities();
-
+	$scope.refreshingEffect = null;
 
 	var stop;
 	$scope.refresh = function() {
@@ -56,6 +33,16 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 			stop = undefined;
 		}
 	};
+
+	$scope.refreshEffect = function() {
+		refreshingEffect = true;
+		$scope.powerConsumption.effect = "Wait..."
+		var effect = Restangular.one('power/effect');
+		effect.getList().then(function(response) {
+			$scope.powerConsumption.effect = Math.round(3600 / ((response[0].P - response[1].P) / 1000 ));
+			refreshingEffect = null;
+		});
+	}
 
 	$scope.$on('$destroy', function() {
 		$scope.stopRefresh();
@@ -104,6 +91,26 @@ angular.module("leadric").controller("powerController", function($scope, $interv
 
 	});
 	} 
+
+	$scope.refreshAllActivities = function() {
+		$scope.allActivitiesRefreshing = true;
+
+		$scope.refreshEffect();
+
+		var today = Restangular.one('power/today');
+		today.getList().then(function(response) {
+			$scope.powerConsumption.today = response[0].today / 1000;
+		});
+
+		var month = Restangular.one('power/month');
+		month.getList().then(function(response) {
+			$scope.powerConsumption.month = response[0].month / 1000;
+			$scope.powerConsumption.money = response[0].month * 0.0012;
+		});	
+
+	}
+
+	$scope.refreshAllActivities();
 
 	$scope.getLast60MinutesTimeline();
 	
