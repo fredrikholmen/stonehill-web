@@ -1,0 +1,22 @@
+{
+  "name": "stonehill-web",
+  "version": "1.0.0",
+  "description": "Angular web app for monitoring house variables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fredrikholmen/stonehill-web.git"
+  },
+  "author": "Fredrik Holmén",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fredrikholmen/stonehill-web/issues"
+  },
+  "homepage": "https://github.com/fredrikholmen/stonehill-web",
+  "dependencies": {
+    "angular-chart.js": "^1.0.2"
+  }
+}
