@@ -12,10 +12,9 @@ angular.module("leadric").controller("temperatureController", function($scope, $
 
 		var effect = Restangular.one('temperature/current');
 		effect.getList().then(function(response) {
-			$scope.temperature[response[0].sensor] = response[0];
-			$scope.temperature[response[1].sensor] = response[1];
+			$scope.temperature['Outdoor'] = response[0];
+			$scope.temperature['Basement'] = response[1];
 		});
-
 
 	}
 
@@ -76,23 +75,37 @@ angular.module("leadric").controller("temperatureController", function($scope, $
 
 	}
 
+	$scope.getLast90DaysTimeline = function() {
+		$scope.timeline = "90days";
+		populateChart('90days');
+
+	}
+
 	function populateChart(period) {
 		var chartData = Restangular.one('temperature/timeline/' + period);
 		chartData.getList().then(function(response) {
 		$scope.labels = [];
 		$scope.data = [[]];
-		$scope.series = ['Outdoor (&deg;C)', 'Basement (&deg;C)'];
+		$scope.series = ['Outdoor (°C)', 'Outdoor Min (°C)','Basement Avg. (°C)'];
 
 		$scope.labels = response.map(function(obj){
 			return obj.slot;
 		});
 
 		$scope.data[0] = response.map(function(obj){
-			if (obj.sensor == 1) return obj.temp;
+			return obj.Outdoor_max;
 		});	
+		
 		$scope.data[1] = response.map(function(obj){
-			if (obj.sensor == 2) return obj.temp;
+			return obj.Outdoor_min;
 		});	
+
+		$scope.data[2] = response.map(function(obj){
+			return obj.Basement_avg;
+		});	
+
+		//console.log($scope.labels);
+		//console.log($scope.data);
 
 	});
 	} 
